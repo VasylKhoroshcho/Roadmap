@@ -38,3 +38,16 @@ const infGenerator = infinite(); // "infGenerator { }"
 console.log(infGenerator.next().value); // 0
 console.log(infGenerator.next().value); // 1
 console.log(infGenerator.next().value); // 2
+
+
+function* gen2() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+
+const g = gen2();
+
+g.next();        // { value: 1, done: false }
+g.return('foo'); // { value: "foo", done: true }
+g.next();        // { value: undefined, done: true }
