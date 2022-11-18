@@ -1,0 +1,62 @@
+version: '3'
+services:
+  elasticSearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.13.0
+    container_name: int-elastic-search
+    environment:
+      - discovery.type=single-node
+      - http.host=0.0.0.0
+      - transport.host=127.0.0.1
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms750m -Xmx750m
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9200:9200
+    networks:
+      - roadmap
+
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    environment:
+      - PUID=1000
+      - PGID=1000
+    ports:
+      - 27017:27017
+    networks:
+      - roadmap
+    restart: unless-stopped
+
+  kibana:
+    image: kibana:7.12.1
+    container_name: int-kibana
+    ports:
+      - 5601:5601
+    networks:
+      - roadmap
+
+  redis:
+    image: redis
+    container_name: int-redis
+    ports:
+      - 6379:6379
+    networks:
+      - roadmap
+    restart: unless-stopped
+
+  rabbit:
+    image: rabbitmq:3-management
+    container_name: int-rabbit
+    ports:
+      - 5671-5672:5671-5672
+      - 3055:15672
+    networks:
+      - roadmap
+    restart: unless-stopped
+
+networks:
+  roadmap:
+    driver: bridge
