@@ -51,3 +51,22 @@ const g = gen2();
 g.next();        // { value: 1, done: false }
 g.return('foo'); // { value: "foo", done: true }
 g.next();        // { value: undefined, done: true }
+
+
+
+function* gen3() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+
+
+console.log([...gen3()])
+
+
+function* gen4() {
+  yield* [1, 3, 4, 6];
+}
+
+
+console.log([...gen4()])
