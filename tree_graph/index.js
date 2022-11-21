@@ -264,10 +264,9 @@ class BSTbalanced {
   }
 }
 
-const array = Array.from({ length: 500000 }, () =>
-Math.floor(Math.random() * 500000)
+const array = Array.from({ length: 50000 }, () =>
+Math.floor(Math.random() * 50000)
 );
-// const array = [1, 0, 7, 5, 4, 7, 8, 2, 3, 7];
 
 
 const randomItem = array[Math.floor(Math.random() * array.length)];
